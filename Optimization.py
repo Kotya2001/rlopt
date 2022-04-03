@@ -331,6 +331,16 @@ while not done:
   g += reward
 print(g)"""
 
-for j, x in enumerate(best_actions):
-    print(f"j = {j} action = {x} reward = {x*p[j]}")
-print(best_g)
+# for j, x in enumerate(best_actions):
+#     print(f"j = {j} action = {x} reward = {x*p[j]}")
+# print(best_g)
+
+ans, res = {}, []
+names = sorted(list(goal_coef.keys()))
+for ind in range(len(names)):
+  if best_actions[ind] != 0:
+    reg, court, year = tuple(names[ind].split('.'))
+    res.append((reg, court, year, int(best_actions[ind])))
+ans = {i[0]: {i[1]: {i[2]: i[3]}} for i in res}
+print(json.dumps(ans, indent=4, ensure_ascii=False))
+
